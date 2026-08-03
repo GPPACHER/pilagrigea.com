@@ -1,0 +1,68 @@
+---
+// CONCEPT — the iceberg, fully explained. Observation deck → source.
+import BaseLayout from '../layouts/BaseLayout.astro'
+import LayerDescent from '../components/LayerDescent.astro'
+import { ICEBERG_FLOW, TAGLINES } from '../data/ontology'
+---
+
+<BaseLayout title="The Iceberg — concept — PIL.AGRIGEA" description="The iceberg is an inference engine: 10% observable, 90% inferred.">
+  <div class="container" style="padding-top: var(--space-7); padding-bottom: var(--space-7);">
+    <p class="section__label"><a href="/">← The Deck</a></p>
+    <h1>The Iceberg</h1>
+    <p class="mono faint" style="letter-spacing:0.14em; margin-bottom: var(--space-6);">{ICEBERG_FLOW}</p>
+
+    <p class="lede" style="margin-bottom: var(--space-7);">
+      The iceberg is an <strong>inference engine</strong>. Ten percent of it is
+      observable from the surface — the events, the data, the effects. Ninety
+      percent of it is below the line: the patterns, the mechanisms, the
+      paradigms that produce what we see. {TAGLINES.observation}
+    </p>
+
+    <section class="prose" style="margin-bottom: var(--space-7);">
+      <h2>Why an iceberg?</h2>
+      <p>
+        Because the interesting part of any phenomenon is the part you cannot
+        see. A stock crash is an effect — its cause lives a kilometer down, in
+        the paradigm that allowed the leverage. An AI model's output is an
+        effect — its cause lives in the training data, which is a culture.
+        Standing on the observation line, you only ever see the tip. The
+        descent is the method for seeing the rest.
+      </p>
+      <p>
+        The layers are not levels of importance — they are levels of inference.
+        <strong>MATRIX</strong> (0m) does not explain; it presents.{" "}
+        <strong>FRAMES</strong> (−50m) detect patterns: taxonomies, timelines,
+        maps. <strong>PILLS</strong> (−200m) infer mechanisms — and pills are
+        hypotheses, never facts. <strong>DEEP</strong> (−500m) validates
+        causality: consensus built or broken. <strong>SOURCE</strong> (−1000m)
+        is the paradigm — bedrock. Ours is self-hosted infrastructure, trading
+        algorithms, and the methodology itself.
+      </p>
+      <blockquote>
+        "WE ARE COOKING KNOWLEDGE" — the source is the stove, the deck is the
+        kitchen, and every fish is a dish still on the fire.
+      </blockquote>
+    </section>
+
+    <section style="margin-bottom: var(--space-7);">
+      <h2>The descent, layer by layer</h2>
+      <LayerDescent />
+    </section>
+
+    <section class="prose" style="margin-bottom: var(--space-7);">
+      <h2>The feedback loop</h2>
+      <p>
+        The flow is downward — observation to paradigm — but the influence is
+        upward. A paradigm at −1000m shapes what the matrix at 0m can even
+        observe. The deck is where the two meet: you stand at the surface,
+        looking down the descent, watching the source steer the surface.
+        {TAGLINES.ethos}
+      </p>
+    </section>
+
+    <div class="hero__cta">
+      <a class="btn btn--active" href="/fishes/">SEE THE FISH</a>
+      <a class="btn" href="/tree/">OR CLIMB THE TREE</a>
+    </div>
+  </div>
+</BaseLayout>

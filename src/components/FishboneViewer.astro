@@ -1,0 +1,42 @@
+---
+// FishboneViewer — renders one fish's anatomy: tail (effects), ribs
+// (variables), spine (mechanism), head (paradigm). Pure static markup.
+import type { Fish } from '../data/fishes'
+import type { FishboneAnatomy } from '../data/ontology'
+
+interface Props {
+  fish: Fish
+  anatomy?: FishboneAnatomy
+}
+
+const { fish } = Astro.props
+const anatomy = Astro.props.anatomy ?? fish.anatomy
+---
+
+<div class="fishbone">
+  <div class="fishbone__tail">
+    <p class="fishbone__label">Tail — Effects</p>
+    <p class="mono" style="margin: 0;">{anatomy.tail}</p>
+  </div>
+
+  <div class="fishbone__ribs">
+    {
+      anatomy.ribs.map((rib) => (
+        <div class="fishbone__rib">
+          <h4>{rib.variable.replace(/_/g, ' ')}</h4>
+          <p class="mono" style="margin: 0; font-size: 0.85rem;">{rib.value}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="fishbone__spine">
+    <p class="fishbone__label">Spine — Mechanism</p>
+    <p style="margin: 0;">{anatomy.spine}</p>
+  </div>
+
+  <div class="fishbone__head">
+    <p class="fishbone__label">Head — Paradigm</p>
+    <p style="margin: 0;">{anatomy.head}</p>
+  </div>
+</div>

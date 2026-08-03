@@ -1,0 +1,22 @@
+---
+// A single fish: fishbone anatomy + pill + related fish + discussion.
+// Any slug not present in FISHES produces a 404 in static output.
+import PostLayout from '../../layouts/PostLayout.astro'
+import { FISHES } from '../../data/fishes'
+import type { Fish } from '../../data/fishes'
+
+export function getStaticPaths() {
+  return FISHES.map((fish) => ({
+    params: { slug: fish.id },
+    props: { fish },
+  }))
+}
+
+interface Props {
+  fish: Fish
+}
+
+const { fish } = Astro.props
+---
+
+<PostLayout fish={fish} />

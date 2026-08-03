@@ -1,0 +1,76 @@
+---
+// THE SKOOL — every fish (post) in the school, newest first, grouped by depth.
+// Posts are data in src/data/fishes.ts; the repo is the CMS.
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PillBadge from '../../components/PillBadge.astro'
+import { PILLS, FISH_DEPTHS } from '../../data/ontology'
+import { FISHES } from '../../data/fishes'
+
+const sorted = [...FISHES].sort((a, b) => b.date.localeCompare(a.date))
+
+const groups = FISH_DEPTHS.map((d) => ({
+  ...d,
+  fish: sorted.filter((f) => f.depth === d.id),
+})).filter((g) => g.fish.length > 0)
+---
+
+<BaseLayout
+  title="The Skool of Fishes — PIL.AGRIGEA"
+  description="Every fish in the school: a network of posts, each a structured fishbone swimming through the iceberg."
+>
+  <section class="container" style="padding-top: var(--space-7); padding-bottom: var(--space-5);">
+    <p class="section__label">// THE SKOOL</p>
+    <h1>The Skool of Fishes</h1>
+    <p class="lede">
+      A network of posts. Each fish is a structured fishbone — tail to head,
+      effects to paradigm — swimming through the iceberg at a given depth,
+      tinted by a pill, carried by one or more currents.
+    </p>
+    <p class="mono faint">
+      {FISHES.length} fish in the school · newest first · grouped by depth
+    </p>
+  </section>
+
+  {
+    groups.map((group) => (
+      <section class="container" style="padding-bottom: var(--space-6);">
+        <div style="display:flex; align-items:baseline; gap: var(--space-3); margin-bottom: var(--space-4);">
+          <h2 class="mono" style="margin: 0;">{group.id}</h2>
+          <span class="mono faint">⬇ {group.meter}</span>
+          <span class="tag">{group.label}</span>
+        </div>
+        <div class="grid grid--2">
+          {
+            group.fish.map((fish) => (
+              <a class="fish-card" href={`/fishes/${fish.id}/`}>
+                <div class="fish-card__head">
+                  <span class="fish-card__emoji">{fish.emoji}</span>
+                  <div>
+                    <h3 style="margin-bottom: 2px;">{fish.title}</h3>
+                    <span class="mono faint" style="font-size:0.72rem;">{fish.subtitle}</span>
+                  </div>
+                </div>
+                <p class="fish-card__excerpt">{fish.excerpt}</p>
+                <div class="fish-card__meta">
+                  <PillBadge pill={PILLS[fish.pill]} />
+                  <span class="tag">{fish.layer}</span>
+                  <span class="depth-tag">⬇ {fish.depth}</span>
+                  <span class="tag">{fish.date}</span>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="container" style="padding-bottom: var(--space-8);">
+    <div class="divider"></div>
+    <p class="mono faint">
+      // The school grows by PR. Add a fish in
+      <code class="mono">src/data/fishes.ts</code> — see
+      <a href="/contribute/">CONTRIBUTING</a>.
+    </p>
+  </section>
+</BaseLayout>

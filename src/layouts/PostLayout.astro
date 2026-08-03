@@ -1,0 +1,133 @@
+---
+// Post layout: single-fish page shell. Fishbone anatomy + pills + related.
+import BaseLayout from './BaseLayout.astro'
+import PillBadge from '../components/PillBadge.astro'
+import FishboneViewer from '../components/FishboneViewer.astro'
+import { PILLS } from '../data/ontology'
+import type { Fish } from '../data/fishes'
+import { relatedFish } from '../data/fishes'
+
+interface Props {
+  fish: Fish
+}
+
+const { fish } = Astro.props
+const pill = PILLS[fish.pill]
+const related = relatedFish(fish)
+
+// giscus config — all four GISCUS_* env vars must be set at build time for
+// discussions to activate; values come from the giscus app setup page.
+// See CONTRIBUTING.md. Missing vars = discussions disabled.
+const GISCUS_REPO = import.meta.env.GISCUS_REPO || ''
+const GISCUS_REPO_ID = import.meta.env.GISCUS_REPO_ID || ''
+const GISCUS_CATEGORY = import.meta.env.GISCUS_CATEGORY || ''
+const GISCUS_CATEGORY_ID = import.meta.env.GISCUS_CATEGORY_ID || ''
+const giscusOn = Boolean(GISCUS_REPO && GISCUS_REPO_ID && GISCUS_CATEGORY && GISCUS_CATEGORY_ID)
+---
+
+<BaseLayout title={`${fish.emoji} ${fish.title} — PIL.AGRIGEA`} description={fish.excerpt}>
+  <article class="container" style="padding-top: var(--space-7); padding-bottom: var(--space-7);">
+    <header style="margin-bottom: var(--space-6);">
+      <p class="section__label">
+        <a href="/fishes/">← The Skool</a>
+      </p>
+      <div style="display:flex; align-items:center; gap: var(--space-4); margin: var(--space-4) 0;">
+        <span style="font-size: 3.5rem; line-height: 1;">{fish.emoji}</span>
+        <div>
+          <h1 style="margin-bottom: var(--space-2);">{fish.title}</h1>
+          <p class="mono faint" style="margin: 0;">{fish.subtitle}</p>
+        </div>
+      </div>
+      <div class="fish-card__meta">
+        <PillBadge pill={pill} />
+        <span class="tag">{fish.domain}</span>
+        <span class="tag">{fish.layer}</span>
+        <span class="depth-tag">⬇ {fish.depth}</span>
+        <span class="tag">{fish.date}</span>
+        {fish.schools.map((s) => <span class="tag">{s.replace('-', ' ')}</span>)}
+      </div>
+    </header>
+
+    <p class="lede" style="margin-bottom: var(--space-7);">{fish.excerpt}</p>
+
+    <section class="prose" style="margin-bottom: var(--space-7);">
+      <h2>Fishbone</h2>
+      <FishboneViewer fish={fish} />
+    </section>
+
+    <section class="prose" style="margin-bottom: var(--space-7);">
+      <h2>The Pill</h2>
+      <p>
+        <strong style="color: {pill.color};">{pill.name}</strong> — {pill.state} · {pill.relations}
+      </p>
+      <p>{pill.description}</p>
+    </section>
+
+    {
+      related.length > 0 && (
+        <section class="prose" style="margin-bottom: var(--space-7);">
+          <h2>Swimming near</h2>
+          <div class="grid grid--2">
+            {
+              related.map((f) => (
+                <a class="fish-card" href={`/fishes/${f.id}/`}>
+                  <div class="fish-card__head">
+                    <span class="fish-card__emoji">{f.emoji}</span>
+                    <h3 style="margin: 0;">{f.title}</h3>
+                  </div>
+                  <p class="fish-card__excerpt">{f.excerpt}</p>
+                </a>
+              ))
+            }
+          </div>
+        </section>
+      )
+    }
+
+    <section>
+      <h2>Discussion</h2>
+      <p class="muted" style="max-width: 640px;">
+        Comments are hosted by <strong>giscus</strong> — they live in the public GitHub
+        repository, so a conversation here is a contribution to the repo itself.
+      </p>
+      {
+        giscusOn ? (
+          <>
+            <div class="giscus"></div>
+            <script
+              is:inline
+              src="https://giscus.app/client.js"
+              data-repo={GISCUS_REPO}
+              data-repo-id={GISCUS_REPO_ID}
+              data-category={GISCUS_CATEGORY}
+              data-category-id={GISCUS_CATEGORY_ID}
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="dark"
+              data-lang="en"
+              data-loading="lazy"
+              crossorigin="anonymous"
+              async
+            ></script>
+          </>
+        ) : (
+          <div
+            style="border: 1px dashed var(--line-bright); border-radius: var(--radius); padding: var(--space-5); background: var(--bg-1);"
+          >
+            <p class="mono" style="margin: 0 0 var(--space-2) 0; color: var(--cyan);">
+              // DISCUSSION OFFLINE
+            </p>
+            <p style="margin: 0;">
+              Comments activate once the public GitHub repository exists and the four
+              <code class="mono">GISCUS_*</code> build variables are set — see
+              <a href="/contribute/">CONTRIBUTING</a>.
+            </p>
+          </div>
+        )
+      }
+    </section>
+  </article>
+</BaseLayout>

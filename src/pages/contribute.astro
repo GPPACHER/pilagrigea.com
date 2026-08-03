@@ -1,0 +1,103 @@
+---
+// CONTRIBUTE — the repo is the CMS. How to add a fish, activate comments,
+// and join the community on GitHub.
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Contribute — PIL.AGRIGEA"
+  description="The repo is the CMS — add a fish, open a discussion, grow the school."
+>
+  <article class="container prose" style="padding-top: var(--space-7); padding-bottom: var(--space-7);">
+    <p class="section__label"><a href="/">← Deck</a></p>
+
+    <h1>Contribute</h1>
+    <p class="lede">
+      The site is a static site and the repository is the CMS. Every fish is a
+      block of data in <code>src/data/fishes.ts</code>; every page is generated
+      from that file at build time. No admin panel, no database, no runtime —
+      just the repo, a PR, and a build.
+    </p>
+
+    <h2>Add a fish</h2>
+    <ol>
+      <li>Open <code class="mono">src/data/fishes.ts</code>.</li>
+      <li>Copy any fish block and fill every field (see the table below).</li>
+      <li>Run <code class="mono">npm run build</code> — the new page is generated at <code class="mono">/fishes/&lt;your-id&gt;/</code>.</li>
+      <li>Open a pull request. The school grows by PR.</li>
+    </ol>
+
+    <h3>Fish fields</h3>
+    <table class="mono">
+      <thead>
+        <tr><th>field</th><th>meaning</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>id</td><td>URL slug — kebab-case, unique</td></tr>
+        <tr><td>emoji</td><td>one glyph that swims with the post</td></tr>
+        <tr><td>title / subtitle</td><td>the hook</td></tr>
+        <tr><td>domain</td><td>tech · culture · economy · geopolitics</td></tr>
+        <tr><td>depth</td><td>SURFACE · MID-WATER · ABYSSAL · HADAL</td></tr>
+        <tr><td>layer</td><td>which iceberg layer the fish lives in</td></tr>
+        <tr><td>pill</td><td>blue · red · black · white · grey</td></tr>
+        <tr><td>schools</td><td>one or more currents — neural-net · memetic-engine · attention-mine · supply-chain</td></tr>
+        <tr><td>date</td><td>ISO date, used for ordering</td></tr>
+        <tr><td>excerpt</td><td>one-line teaser for cards and <code>&lt;meta&gt;</code></td></tr>
+        <tr><td>anatomy.tail</td><td>observed effects — what is on the surface</td></tr>
+        <tr><td>anatomy.ribs</td><td>four variables: UPSTREAM_CAUSE · DOWNSTREAM_EFFECT · HIDDEN_VARIABLE · REFLEX_ACTION, each with a value</td></tr>
+        <tr><td>anatomy.spine</td><td>the mechanism — the thread connecting head to tail</td></tr>
+        <tr><td>anatomy.head</td><td>the distilled conclusion</td></tr>
+        <tr><td>links</td><td>ids of real fish this one relates to, with a label</td></tr>
+      </tbody>
+    </table>
+
+    <h3>What makes a good fish</h3>
+    <ul>
+      <li>Every rib filled. The spine must connect head to tail — effects traced to variables, variables to a mechanism, mechanism to a paradigm.</li>
+      <li>Links point to existing fish ids. The school is a network, not a pile.</li>
+      <li>One dominant pill, one dominant layer. A fish that says everything says nothing.</li>
+      <li>Pills are hypotheses, not facts. Write as if you could be wrong — because you are, eventually.</li>
+    </ul>
+
+    <h2>The community</h2>
+    <p>
+      Community lives on GitHub: the public repository plus its Discussions
+      forum. This site is the distillation; the repo is where the school is
+      actually written.
+    </p>
+    <ul>
+      <li>
+        <strong>Repository</strong> — <a href="https://github.com/Pilagrigea/pilagrigea.com">github.com/Pilagrigea/pilagrigea.com</a>
+        (create it, then this link goes live).
+      </li>
+      <li>
+        <strong>Discussions</strong> — propose fish, argue with pills, split a
+        current. Anything that should become a post starts as a discussion.
+      </li>
+    </ul>
+
+    <h3>Activate comments (giscus)</h3>
+    <ol>
+      <li>Create the public repo on GitHub and enable <strong>Discussions</strong>.</li>
+      <li>Install the <a href="https://github.com/apps/giscus">giscus app</a> on the repo.</li>
+      <li>Open <a href="https://giscus.app">giscus.app</a>, select the repo, mapping = <em>pathname</em>, and create a Discussions category.</li>
+      <li>Copy the four values — repo, repo id, category, category id — and set them as build variables:</li>
+    </ol>
+    <pre class="mono" style="border:1px solid var(--line); border-radius: var(--radius); padding: var(--space-4); overflow-x:auto;">
+GISCUS_REPO=Pilagrigea/pilagrigea.com
+GISCUS_REPO_ID=&lt;from giscus.app&gt;
+GISCUS_CATEGORY=&lt;name of your category&gt;
+GISCUS_CATEGORY_ID=&lt;from giscus.app&gt;</pre>
+    <p>
+      Set them in Cloudflare Pages (Settings → Environment variables) or in a
+      local <code class="mono">.env</code>, then rebuild. Every fish page
+      gains a comment thread. Until then the site ships with a
+      <span class="mono faint">// DISCUSSION OFFLINE</span> placeholder.
+    </p>
+
+    <div class="divider"></div>
+    <p class="mono faint">
+      {`// OBSERVE → INFER → ANALYZE → DISTILL — then write it down and open a PR.`}
+    </p>
+  </article>
+</BaseLayout>

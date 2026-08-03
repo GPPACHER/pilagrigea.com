@@ -1,0 +1,166 @@
+---
+// INDEX — the observation deck.
+// Hero (iceberg SVG) → the skool network (interactive) → the descent
+// (five layers) → the anatomy (fishbone) → the pharmacology (tree teaser).
+import BaseLayout from '../layouts/BaseLayout.astro'
+import LayerDescent from '../components/LayerDescent.astro'
+import FishboneViewer from '../components/FishboneViewer.astro'
+import PillBadge from '../components/PillBadge.astro'
+import SkoolNetwork from '../components/SkoolNetwork.tsx'
+import TreeExplorer from '../components/TreeExplorer.tsx'
+import { ICEBERG_FLOW, TAGLINES, PILLS, TREE_PARTS, SCHOOLS } from '../data/ontology'
+import { FISHES, FISH_INDEX } from '../data/fishes'
+---
+
+<BaseLayout title="PIL.AGRIGEA — the observation deck" description={TAGLINES.observation}>
+  {/* ============================== HERO ============================== */}
+  <section class="hero container">
+    <div class="hero__glow hero__glow--cyan" aria-hidden="true"></div>
+    <div class="hero__glow hero__glow--pink" aria-hidden="true"></div>
+
+    <div class="hero__content">
+      <p class="hero__kicker">{TAGLINES.cook} · {TAGLINES.ethos}</p>
+
+      <h1 class="hero__title">
+        PIL<span class="accent">.</span>AGRIGEA
+      </h1>
+
+      <div style="display:flex; align-items:center; gap: var(--space-5); margin-bottom: var(--space-5);">
+        <!-- The iceberg: visible tip above the line, hidden mass below. -->
+        <svg viewBox="0 0 240 200" style="width: 120px; flex-shrink: 0;" role="img" aria-label="The PIL.AGRIGEA iceberg: a small visible tip, a large hidden mass, floating on the observation line">
+          <line x1="10" y1="70" x2="230" y2="70" stroke="#00f0ff" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+          <text x="12" y="62" fill="#ff0080" font-family="monospace" font-size="9" letter-spacing="2">OBSERVATION LINE</text>
+          <path d="M120 12 L146 44 L94 44 Z" fill="#00f0ff" opacity="0.95"/>
+          <path d="M70 44 L170 44 L148 92 L92 92 Z" fill="#00f0ff" opacity="0.4"/>
+          <path d="M92 92 L148 92 L134 140 L106 140 Z" fill="#00f0ff" opacity="0.2"/>
+          <text x="120" y="120" fill="#e6edf3" font-family="monospace" font-size="7" opacity="0.8" text-anchor="middle">90% INFERRED</text>
+        </svg>
+        <div>
+          <p class="lede" style="margin-bottom: var(--space-3);">
+            An iceberg of inference, a tree of pills, a skool of fishes.
+            Ten percent visible. Ninety percent below the line. Everything here
+            is an observation — nothing is a fact.
+          </p>
+          <p class="mono faint" style="font-size:0.8rem; letter-spacing:0.14em;">{ICEBERG_FLOW}</p>
+        </div>
+      </div>
+
+      <div class="hero__cta">
+        <a class="btn btn--active" href="#skool">ENTER THE SKOOL ↓</a>
+        <a class="btn btn--pink" href="/concept/">THE ICEBERG</a>
+        <a class="btn" href="/tree/">THE TREE</a>
+      </div>
+
+      <div class="hero__meta">
+        <span>{FISHES.length} FISH IN THE SCHOOL</span>
+        <span>{SCHOOLS.length} CURRENTS</span>
+        <span>5 LAYERS · 5 PILLS</span>
+        <span>0 DEPENDENCIES</span>
+      </div>
+    </div>
+  </section>
+
+  {/* ============================ THE SKOOL =========================== */}
+  <section class="section section--alt" id="skool">
+    <div class="container">
+      <p class="section__label">// 01 — THE SKOOL OF FISHES</p>
+      <h2>The network of posts</h2>
+      <p class="lede" style="margin-bottom: var(--space-6);">
+        Each fish is a structured post — a fishbone swimming in a current at a
+        depth, tinted by a pill. Hover to inspect, drag to disturb the school,
+        click a fish to open its bone. The links between fish are the currents
+        they swim in.
+      </p>
+
+      <SkoolNetwork client:load />
+    </div>
+  </section>
+
+  {/* ========================= THE DESCENT ============================ */}
+  <section class="section" id="descent">
+    <div class="container">
+      <p class="section__label">// 02 — THE DESCENT</p>
+      <h2>The iceberg is an inference engine</h2>
+      <p class="lede" style="margin-bottom: var(--space-6);">
+        From the observation line at 0m to the paradigm at −1000m. Each layer
+        observes the one above and feeds the one below — and the feedback
+        ascends: the source shapes everything.
+      </p>
+      <LayerDescent />
+    </div>
+  </section>
+
+  {/* ========================== THE ANATOMY =========================== */}
+  <section class="section section--alt" id="anatomy">
+    <div class="container">
+      <p class="section__label">// 03 — THE ANATOMY</p>
+      <h2>Every fish is a fishbone</h2>
+      <p class="lede" style="margin-bottom: var(--space-6);">
+        Tail to head: effects are observed first, mechanisms are inferred last.
+        The bones of <strong>{FISH_INDEX['precarity-engine'].title}</strong> —
+        a hadal fish swimming in the supply-chain and attention currents:
+      </p>
+
+      <FishboneViewer fish={FISH_INDEX['precarity-engine']} />
+
+      <p class="mono faint" style="margin-top: var(--space-5); font-size:0.8rem;">
+        — TAIL (EFFECTS) → RIBS (VARIABLES) → SPINE (MECHANISM) → HEAD (PARADIGM)
+      </p>
+    </div>
+  </section>
+
+  {/* ======================== THE PHARMACOLOGY ========================= */}
+  <section class="section" id="tree">
+    <div class="container">
+      <p class="section__label">// 04 — THE PHARMACOLOGY</p>
+      <h2>The tree of pills</h2>
+      <p class="lede" style="margin-bottom: var(--space-6);">
+        {TAGLINES.pharmacology}
+      </p>
+
+      <TreeExplorer client:load />
+
+      <div class="pill-strip" style="margin-top: var(--space-6);">
+        {
+          (Object.keys(PILLS) as (keyof typeof PILLS)[]).map((id) => (
+            <PillBadge pill={PILLS[id]} />
+          ))
+        }
+        {
+          TREE_PARTS.map((part) => (
+            <span class="tag">{part.id}</span>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ============================ ALL FISH ============================= */}
+  <section class="section section--alt" id="roster">
+    <div class="container">
+      <p class="section__label">// 05 — THE ROSTER</p>
+      <h2>All fish in the school</h2>
+      <div class="grid grid--2" style="margin-top: var(--space-5);">
+        {
+          FISHES.map((fish) => (
+            <a class="fish-card" href={`/fishes/${fish.id}/`}>
+              <div class="fish-card__head">
+                <span class="fish-card__emoji">{fish.emoji}</span>
+                <div>
+                  <h3 style="margin-bottom: 2px;">{fish.title}</h3>
+                  <span class="mono faint" style="font-size:0.72rem;">{fish.subtitle}</span>
+                </div>
+              </div>
+              <p class="fish-card__excerpt">{fish.excerpt}</p>
+              <div class="fish-card__meta">
+                <PillBadge pill={PILLS[fish.pill]} />
+                <span class="tag">{fish.layer}</span>
+                <span class="depth-tag">⬇ {fish.depth}</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

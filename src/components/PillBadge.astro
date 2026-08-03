@@ -1,0 +1,20 @@
+---
+// PillBadge — static badge showing a pill's color + state. No JS needed.
+import { PILLS } from '../data/ontology'
+import type { PillId } from '../data/ontology'
+
+interface Props {
+  pill: (typeof PILLS)[PillId]
+}
+
+const { pill } = Astro.props
+---
+
+<span
+  class="pill-badge"
+  style={`color: ${pill.color}; border-color: ${pill.color};`}
+  title={pill.relations}
+>
+  <span class="pill-badge__dot" style={`background: ${pill.color};`}></span>
+  {pill.name}
+</span>

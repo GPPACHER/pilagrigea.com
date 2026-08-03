@@ -1,0 +1,73 @@
+---
+// TREE — the pharmacology of ideas. Roots → trunk → branches → fruits.
+import BaseLayout from '../layouts/BaseLayout.astro'
+import TreeExplorer from '../components/TreeExplorer.tsx'
+import PillBadge from '../components/PillBadge.astro'
+import { PILLS, TAGLINES, TREE_PARTS } from '../data/ontology'
+import { FISHES } from '../data/fishes'
+---
+
+<BaseLayout title="The Tree — pharmacology — PIL.AGRIGEA" description="A living pharmacology of ideas — they oppose, they complement, they are the sickness and the cure.">
+  <div class="container" style="padding-top: var(--space-7); padding-bottom: var(--space-7);">
+    <p class="section__label"><a href="/">← The Deck</a></p>
+    <h1>The Tree of Pills</h1>
+    <p class="lede" style="margin-bottom: var(--space-6);">
+      {TAGLINES.pharmacology}
+    </p>
+
+    <p class="mono" style="font-size:0.85rem; letter-spacing:0.14em; color: var(--fg-dim); margin-bottom: var(--space-7);">
+      ROOTS (stress) → TRUNK (neutral) → BRANCHES (the pills grow here) → FRUITS (the synthesis)
+    </p>
+
+    <TreeExplorer client:load />
+
+    <hr class="divider" />
+
+    <section class="prose" style="margin-bottom: var(--space-7);">
+      <h2>The pillars</h2>
+      <div class="tree-parts">
+        {
+          TREE_PARTS.map((part) => (
+            <div class="tree-part">
+              <h3>{part.id}</h3>
+              <p>{part.description}</p>
+              <div class="pill-strip">
+                {
+                  part.pillIds.map((id) => (
+                    <PillBadge pill={PILLS[id]} />
+                  ))
+                }
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="prose" style="margin-bottom: var(--space-7);">
+      <h2>The matrix</h2>
+      <div class="fishbone__ribs">
+        {
+          (Object.keys(PILLS) as (keyof typeof PILLS)[]).map((id) => {
+            const pill = PILLS[id]
+            const count = FISHES.filter((f) => f.pill === id).length
+            return (
+              <div class="fishbone__rib" style="border-left-color: {pill.color};">
+                <h4 style="color: {pill.color};">{pill.name} · {pill.state}</h4>
+                <p style="margin: 0 0 var(--space-2) 0; font-size:0.9rem;">{pill.description}</p>
+                <p class="mono faint" style="margin: 0; font-size:0.75rem;">
+                  {pill.relations} · {count} FISH
+                </p>
+              </div>
+            )
+          })
+        }
+      </div>
+    </section>
+
+    <div class="hero__cta">
+      <a class="btn btn--active" href="/fishes/">SWIM WITH THE FISH</a>
+      <a class="btn" href="/concept/">DIVE THE ICEBERG</a>
+    </div>
+  </div>
+</BaseLayout>

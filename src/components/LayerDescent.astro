@@ -1,0 +1,22 @@
+---
+// LayerDescent — the iceberg's five layers as a vertical descent, data-driven.
+import { ICEBERG_LAYERS } from '../data/ontology'
+---
+
+<div class="layers">
+  {
+    ICEBERG_LAYERS.map((layer) => (
+      <div class="layer" id={`layer-${layer.id.toLowerCase()}`}>
+        <span class="layer__depth">{layer.depth}</span>
+        <div class="layer__body">
+          <p class="section__label" style="margin-bottom: 2px;">{layer.id}</p>
+          <h3 style="margin-bottom: 2px;">{layer.name}</h3>
+          <p class="layer__tagline">{layer.tagline}</p>
+          <p class="layer__desc">{layer.description}</p>
+          <p class="layer__flow">{layer.flow}</p>
+        </div>
+        <span class="layer__percent">{layer.percent}%</span>
+      </div>
+    ))
+  }
+</div>

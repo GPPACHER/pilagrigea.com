@@ -1,0 +1,67 @@
+---
+// Base layout: terminal-themed shell with sticky nav + footer.
+// Every page hydrates through this layout.
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description?: string
+}
+
+const { title, description = 'PIL.AGRIGEA — the observation deck. An iceberg of inference, a tree of pills, a skool of fishes.' } = Astro.props
+
+const NAV = [
+  { href: '/', label: 'Deck' },
+  { href: '/concept/', label: 'Iceberg' },
+  { href: '/tree/', label: 'Tree' },
+  { href: '/fishes/', label: 'Skool' },
+  { href: '/contribute/', label: 'Contribute' },
+  { href: '/about/', label: 'About' },
+]
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="PIL.AGRIGEA" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <nav class="site-nav" aria-label="Primary">
+      <div class="container site-nav__inner">
+        <a href="/" class="site-nav__brand">PIL<span class="dot">.</span>AGRIGEA</a>
+        <ul class="site-nav__links">
+          {
+            NAV.map((item) => (
+              <li>
+                <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <span>SELF.HOSTED // NO.DEPENDENCIES</span>
+        <span>OBSERVE → INFER → ANALYZE → DISTILL</span>
+        <span>© {new Date().getFullYear()} PIL.AGRIGEA</span>
+      </div>
+    </footer>
+  </body>
+</html>

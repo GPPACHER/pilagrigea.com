@@ -1,0 +1,75 @@
+---
+// ABOUT — what PIL.AGRIGEA is: the box, the iceberg, the tree, the skool.
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { TAGLINES } from '../data/ontology'
+---
+
+<BaseLayout
+  title="About — PIL.AGRIGEA"
+  description="What PIL.AGRIGEA is — the box, the iceberg, the tree, and the skool of fishes."
+>
+  <article class="container prose" style="padding-top: var(--space-7); padding-bottom: var(--space-7);">
+    <p class="section__label"><a href="/">← Deck</a></p>
+
+    <h1>About</h1>
+    <p class="lede">
+      PIL.AGRIGEA is a public lab for turning observed chaos into tested
+      hypotheses. One box to stand in, one iceberg to descend, one tree of
+      pills to swallow, one school of fish to argue with.
+    </p>
+
+    <h2>The box</h2>
+    <p>
+      {TAGLINES.observation} The observation deck is the only place this site
+      claims you should stand. Everything below is inference.
+    </p>
+
+    <h2>The iceberg</h2>
+    <p>
+      The iceberg is an <strong>inference engine</strong>: 10% observable, 90%
+      inferred. Five layers descend from the surface toward the paradigm —
+      <span class="mono">MATRIX → FRAMES → PILLS → DEEP → SOURCE</span>. Each
+      layer observes, detects, infers, validates, or reveals. Nothing below the
+      waterline is a fact; it is a working model.
+    </p>
+
+    <h2>The tree</h2>
+    <p>
+      {TAGLINES.pharmacology} The tree is the <strong>pharmacology of the
+      pills</strong>: roots to trunk to branches to fruits, five pills —
+      blue, red, black, white, grey — that oppose, complement, and cure each
+      other. Ideas are dosed, not believed.
+    </p>
+
+    <h2>The skool</h2>
+    <p>
+      The skool of fishes is the <strong>living record</strong>: a network of
+      posts, each a structured fishbone swimming through the iceberg at a
+      depth, tinted by a pill, carried by a current. The skool is never
+      complete. It grows by pull request, argues by discussion, and changes
+      its mind in public.
+    </p>
+
+    <h2>The stack</h2>
+    <p class="mono">
+      ASTRO 5 · REACT ISLANDS · TYPESCRIPT · STATIC HTML OUTPUT · ZERO RUNTIME
+      DEPENDENCIES · CLOUDFLARE PAGES
+    </p>
+    <p>
+      The site compiles to flat, static HTML at build time. The interactive
+      network and the tree explorer are small client-side islands; everything
+      else is plain markup. There is no server, no database, no tracking.
+      {TAGLINES.ethos}
+    </p>
+
+    <h2>Identity</h2>
+    <p>
+      Signed <span class="mono">Pil_aG</span> — the ghost in the box. The
+      methodology is self-hosted and dependency-free, which is itself one of
+      the pills this site swallows.
+    </p>
+
+    <div class="divider"></div>
+    <p class="mono faint">WE ARE COOKING KNOWLEDGE.</p>
+  </article>
+</BaseLayout>

@@ -1,0 +1,748 @@
+/* ============================================================================
+   PIL.AGRIGEA — GLOBAL STYLES
+   Terminal aesthetic. Uppercase display type, wide letter-spacing, neon on
+   near-black. The palette is the pharmacology: cyan = observation deck,
+   pink = the system's own signal, pill colors from the tree.
+   ========================================================================== */
+
+:root {
+  --bg-0: #050505;
+  --bg-1: #0a0a0f;
+  --bg-2: #0d1117;
+  --bg-3: #131722;
+
+  --fg: #e6edf3;
+  --fg-dim: #8b949e;
+  --fg-faint: #484f58;
+
+  --cyan: #00f0ff;
+  --pink: #ff0080;
+
+  --blue: #0066cc;
+  --red: #cc0000;
+  --black: #1a1a1a;
+  --white: #e8e8e8;
+  --grey: #666666;
+
+  --line: #1f2733;
+  --line-bright: #2d3748;
+
+  --mono: 'SF Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
+    Consolas, 'Liberation Mono', monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --radius: 4px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-0);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--cyan);
+  color: var(--bg-0);
+}
+
+a {
+  color: var(--cyan);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+a:hover {
+  opacity: 0.75;
+}
+
+code,
+kbd,
+.mono {
+  font-family: var(--mono);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 var(--space-4) 0;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.2rem, 2.6vw, 1.8rem);
+  color: var(--cyan);
+}
+
+h3 {
+  font-size: 1rem;
+  color: var(--fg);
+}
+
+p {
+  margin: 0 0 var(--space-4) 0;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+/* --- Layout primitives ---------------------------------------------------- */
+
+.section {
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--line);
+}
+
+.section--alt {
+  background: var(--bg-1);
+}
+
+.section__label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.grid--2 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid--3 {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* --- Tags / pills / badges ------------------------------------------------ */
+
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border: 1px solid var(--line-bright);
+  border-radius: var(--radius);
+  color: var(--fg-dim);
+  white-space: nowrap;
+}
+
+.tag--active {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid;
+}
+
+.pill-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.depth-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+/* --- Fishbone ------------------------------------------------------------- */
+
+.fishbone {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.fishbone__tail,
+.fishbone__head {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  background: var(--bg-1);
+}
+
+.fishbone__label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: var(--space-2);
+}
+
+.fishbone__ribs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+}
+
+.fishbone__rib {
+  border-left: 3px solid var(--line-bright);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-2);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.fishbone__rib h4 {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--fg-dim);
+  margin-bottom: var(--space-2);
+}
+
+.fishbone__spine {
+  border-top: 2px solid var(--cyan);
+  border-bottom: 2px solid var(--cyan);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.06), rgba(0, 240, 255, 0.02));
+}
+
+/* --- Tree explorer -------------------------------------------------------- */
+
+.tree-parts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+.tree-part {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  background: var(--bg-1);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.tree-part:hover {
+  border-color: var(--line-bright);
+  transform: translateY(-2px);
+}
+
+.tree-part h3 {
+  color: var(--cyan);
+}
+
+.tree-part p {
+  color: var(--fg-dim);
+  font-size: 0.9rem;
+}
+
+.pill-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* --- Fish cards ----------------------------------------------------------- */
+
+.fish-card {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  background: var(--bg-1);
+  color: var(--fg);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fish-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 24px rgba(0, 240, 255, 0.08);
+  opacity: 1;
+}
+
+.fish-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.fish-card__emoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.fish-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.fish-card__excerpt {
+  color: var(--fg-dim);
+  font-size: 0.92rem;
+  margin-bottom: 0;
+}
+
+/* --- Network canvas ------------------------------------------------------- */
+
+.network-wrap {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(0, 240, 255, 0.05), transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(255, 0, 128, 0.04), transparent 60%),
+    var(--bg-1);
+  overflow: hidden;
+}
+
+.network-canvas {
+  display: block;
+  width: 100%;
+  height: 640px;
+  cursor: crosshair;
+}
+
+.network-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.network-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.network-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(360px, 100%);
+  background: rgba(10, 10, 15, 0.96);
+  border-left: 1px solid var(--line-bright);
+  padding: var(--space-5);
+  overflow-y: auto;
+  z-index: 5;
+}
+
+.network-panel__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: none;
+  border: 1px solid var(--line-bright);
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.network-panel__close:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+}
+
+.network-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--fg-dim);
+  text-transform: uppercase;
+}
+
+.network-hint {
+  color: var(--fg-faint);
+  margin-left: auto;
+}
+
+/* --- Buttons -------------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border: 1px solid var(--line-bright);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.btn:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.btn--active {
+  border-color: var(--cyan);
+  color: var(--bg-0);
+  background: var(--cyan);
+}
+
+.btn--pink:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+}
+
+/* --- Hero ----------------------------------------------------------------- */
+
+.hero {
+  min-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__glow {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  max-width: 720px;
+  max-height: 720px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__glow--cyan {
+  background: var(--cyan);
+  top: -20%;
+  left: -10%;
+}
+
+.hero__glow--pink {
+  background: var(--pink);
+  bottom: -25%;
+  right: -12%;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__kicker {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  color: var(--pink);
+  text-transform: uppercase;
+  margin-bottom: var(--space-5);
+}
+
+.hero__title {
+  font-size: clamp(2.4rem, 8vw, 5.5rem);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  margin-bottom: var(--space-5);
+}
+
+.hero__title .accent {
+  color: var(--cyan);
+}
+
+.hero__sub {
+  max-width: 640px;
+  color: var(--fg-dim);
+  font-size: 1.05rem;
+  margin-bottom: var(--space-6);
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.hero__meta {
+  margin-top: var(--space-8);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  color: var(--fg-faint);
+  text-transform: uppercase;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* --- Nav / footer --------------------------------------------------------- */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+  gap: var(--space-4);
+}
+
+.site-nav__brand {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--fg);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.site-nav__brand .dot {
+  color: var(--cyan);
+}
+
+.site-nav__links {
+  display: flex;
+  gap: var(--space-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__links a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.site-nav__links a:hover,
+.site-nav__links a[aria-current='page'] {
+  color: var(--cyan);
+}
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: var(--space-7) 0 var(--space-8) 0;
+  color: var(--fg-faint);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- Layer descent (index) ------------------------------------------------ */
+
+.layers {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.layer {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  background: var(--bg-1);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-5);
+  align-items: start;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.layer:hover {
+  border-color: var(--line-bright);
+  background: var(--bg-2);
+}
+
+.layer__depth {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--cyan);
+  white-space: nowrap;
+}
+
+.layer__body h3 {
+  margin-bottom: var(--space-1);
+}
+
+.layer__tagline {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--pink);
+  letter-spacing: 0.14em;
+  margin-bottom: var(--space-2);
+}
+
+.layer__desc {
+  color: var(--fg-dim);
+  font-size: 0.92rem;
+  margin-bottom: 0;
+}
+
+.layer__percent {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--fg-faint);
+  white-space: nowrap;
+  text-align: right;
+}
+
+.layer__flow {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--fg-faint);
+  margin-top: var(--space-2);
+  text-transform: uppercase;
+}
+
+/* --- Typography helpers --------------------------------------------------- */
+
+.muted {
+  color: var(--fg-dim);
+}
+
+.faint {
+  color: var(--fg-faint);
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+.lede {
+  font-size: 1.1rem;
+  color: var(--fg-dim);
+  max-width: 720px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: var(--space-7) 0;
+}
+
+/* --- Prose (post pages) --------------------------------------------------- */
+
+.prose {
+  max-width: 720px;
+}
+
+.prose p,
+.prose li {
+  color: var(--fg-dim);
+}
+
+.prose blockquote {
+  margin: var(--space-5) 0;
+  padding: var(--space-4) var(--space-5);
+  border-left: 3px solid var(--cyan);
+  background: var(--bg-1);
+  font-family: var(--mono);
+  color: var(--fg);
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+
+@media (max-width: 720px) {
+  .site-nav__links {
+    display: none;
+  }
+
+  .layer {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .layer__percent {
+    text-align: left;
+  }
+
+  .network-canvas {
+    height: 480px;
+  }
+
+  .network-panel {
+    width: 100%;
+  }
+}
