@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Market Clock</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<button id="legend-toggle" title="Legend (h)" aria-label="Toggle legend">ⓘ</button>
+<main id="layout">
+  <section id="legend">
+    <h2>Reading the dial</h2>
+    <div class="lg-item"><span class="lg-dot"></span>
+      <p>Each <b>dot</b> is that venue's current local time on its ring. Bright + halo = in session; dim = closed.</p></div>
+    <div class="lg-item"><span class="lg-overlap"></span>
+      <p>The <b>black track</b> = session overlap — 2+ venues open at once (e.g. LDN∩NYSE 21:30–00:30).</p></div>
+    <div class="lg-item"><span class="lg-att"></span>
+      <p>The <b>yellow track</b> = volatility triggers — funds/algos loading, spreads wide, traps form.
+      <br><b>Bright slots</b> = do-not-trade windows (cash open, stop-runs, FOMC, MOC/close).
+      <br><b>Regular slots</b> = reduced size (reversals, flips, lunch traps, power hour).</p></div>
+    <h3>Asia (+8)</h3>
+    <ul class="lg-slots">
+      <li>08:00–09:00 — Asia open, funds positioning</li>
+      <li class="b">10:00–10:30 — the 10:00 reversal, stop-run / AMD</li>
+      <li>11:30–12:00 — pre-lunch, HK liquidity pulled</li>
+      <li>14:30–15:00 — HK re-open, whipsaw</li>
+      <li>16:00–16:30 — late-Asia fixing</li>
+    </ul>
+    <h3>US session (+8, winter ET)</h3>
+    <ul class="lg-slots">
+      <li class="b">22:30–22:45 — 9:30 ET cash open, funds loading at the bell</li>
+      <li class="b">22:35–22:45 — 9:35 ET first 5-min reversal, stop-run</li>
+      <li>22:50–23:00 — 9:50 ET momentum flip</li>
+      <li>23:10–23:20 — 10:10 ET trap window</li>
+      <li class="b">23:35–23:45 — 10:35 ET late-morning flush</li>
+      <li class="b">03:00–03:15 — 14:00 ET FOMC statement window</li>
+      <li>04:00–04:10 — 15:00 ET power hour starts</li>
+      <li>04:20–04:30 — 15:20 ET</li>
+      <li class="b">04:40–04:50 — 15:40 ET MOC imbalance window</li>
+      <li class="b">04:50–05:00 — 15:50 ET MOC imbalance</li>
+      <li class="b">05:00–05:10 — 16:00 ET close, closing auction</li>
+    </ul>
+    <p class="lg-foot">Yellow = algos loading — size down or wait for the sweep.</p>
+  </section>
+  <section id="dial-wrap">
+    <svg id="dial" viewBox="0 0 600 600" role="img" aria-label="24 hour market clock">
+      <defs id="dial-defs">
+        <radialGradient id="inset" cx="50%" cy="50%" r="50%">
+          <stop offset="82%" stop-color="rgba(0,0,0,0)"/>
+          <stop offset="97%" stop-color="rgba(0,0,0,.28)"/>
+          <stop offset="100%" stop-color="rgba(0,0,0,.45)"/>
+        </radialGradient>
+      </defs>
+      <circle id="face" cx="300" cy="300" r="298"/>
+      <g id="ticks"></g>
+      <g id="numerals"></g>
+      <g id="rings"></g>
+      <circle id="inset-shadow" cx="300" cy="300" r="298" fill="url(#inset)" pointer-events="none"/>
+      <g id="dots"></g>
+      <g id="hands"></g>
+    </svg>
+  </section>
+  <section id="events">
+    <h2>Today's Events <span id="ics-status"></span></h2>
+    <ul id="event-list"><li class="empty">Loading…</li></ul>
+  </section>
+</main>
+<section id="season">
+  <header id="season-head">
+    <h2>Season calendar</h2>
+    <nav id="season-tabs">
+      <button data-tab="preview">Earnings Preview</button>
+      <button data-tab="earnings">Earnings</button>
+      <button data-tab="dividends" class="active">Dividends</button>
+      <button data-tab="economic">Economic</button>
+    </nav>
+    <span id="season-updated"></span>
+  </header>
+  <div id="season-body"><p class="season-empty">Loading…</p></div>
+</section>
+<button id="season-toggle" title="Dividends / earnings / economic calendar">▽ Dividends ▽</button>
+<script src="js/season.js"></script>
+<script src="js/clock.js"></script>
+</body>
+</html>

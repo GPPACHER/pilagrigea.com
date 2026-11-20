@@ -1,0 +1,7 @@
+*.py
+shots/
+__pycache__/
+*.log
+.env*
+.state.json
+.DS_Store
